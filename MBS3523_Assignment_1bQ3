@@ -1,0 +1,18 @@
+import cv2
+import numpy as np
+
+cam = cv2.VideoCapture(0)
+
+while True:
+    ret, frame = cam.read()
+    frameH = cv2.flip(frame,1)
+    frameuse = np.hstack((frame,frameH))
+    frameV = cv2.flip(frameuse,0)
+    frameuse = np.vstack((frameuse,frameV))
+    frameuse = cv2.resize(frameuse, (600, 600))
+    cv2.imshow("Output",frameuse)
+    if cv2.waitKey(1) == ord('q'):
+        break
+
+cam.release()
+cv2.destroyAllWindows()
